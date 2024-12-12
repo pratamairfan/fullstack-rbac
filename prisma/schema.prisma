@@ -79,7 +79,7 @@ model datel {
   id        Int    @id @default(autoincrement())
   namaDatel String
   witelId   Int
-  witel     witel  @relation(fields: [witelId], references: [id])
+  witel     witel  @relation(fields: [witelId], references: [id], onDelete: Cascade)
 
   site site[]
 
@@ -114,9 +114,9 @@ model site {
   region    String
   ownLease  String
   userId    String?
-  user      User?   @relation(fields: [userId], references: [id])
-  witel     witel    @relation(fields: [witelId], references: [id])
-  datel     datel    @relation(fields: [datelId], references: [id])
+  user      User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  witel     witel    @relation(fields: [witelId], references: [id], onDelete: Cascade)
+  datel     datel    @relation(fields: [datelId], references: [id], onDelete: Cascade)
   permit    permit[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -144,8 +144,8 @@ model permit {
   status          detailStatus @default(Checking)
   siteId          Int
   userId          String
-  site            site         @relation(fields: [siteId], references: [id])
-  user            User        @relation(fields: [userId], references: [id])
+  site            site         @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   visitorPIC      visitorPIC[]
   createdAt       DateTime     @default(now())
   updatedAt       DateTime     @updatedAt
@@ -159,7 +159,7 @@ model visitorPIC {
   nik      Int
   area     String
   permitId String
-  permit   permit  @relation(fields: [permitId], references: [id])
+  permit   permit  @relation(fields: [permitId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

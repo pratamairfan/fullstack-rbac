@@ -27,7 +27,6 @@ const FormSignup = () => {
           <input
             type="text"
             name="firstName"
-            id="name"
             placeholder="John"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           />
@@ -47,7 +46,6 @@ const FormSignup = () => {
           <input
             type="text"
             name="lastName"
-            id="name"
             placeholder="Doe"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           />
@@ -68,7 +66,6 @@ const FormSignup = () => {
         <input
           type="email"
           name="email"
-          id="email"
           placeholder="johndoe@example.com"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         />
@@ -88,7 +85,6 @@ const FormSignup = () => {
         <input
           type="password"
           name="password"
-          id="password"
           placeholder="••••••••"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         />
@@ -108,7 +104,6 @@ const FormSignup = () => {
         <input
           type="password"
           name="confirmPassword"
-          id="confirmPassword"
           placeholder="••••••••"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         />
