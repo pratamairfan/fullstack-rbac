@@ -64,8 +64,8 @@ model User {
   lastName  String?
   imgUrl    String?
   phone     String?
-  role      UserRole @default(User)
   password  String?
+  role      UserRole @default(User)
   permit    permit[]
   site      site[]
 
