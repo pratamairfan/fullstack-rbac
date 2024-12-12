@@ -1,0 +1,166 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+// prisma/schema.prisma
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  //   // uncomment next line if you use Prisma <5.10
+  //   // directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+enum UserRole {
+  Admin
+  User
+  Manager
+  Staff
+  Viewer
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
+  expires      DateTime
+  user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  firstName String?
+  lastName  String?
+  imgUrl    String?
+  phone     String?
+  role      UserRole @default(User)
+  password  String?
+  permit    permit[]
+  site      site[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  account   Account[]
+  session   Session[]
+}
+
+model datel {
+  id        Int    @id @default(autoincrement())
+  namaDatel String
+  witelId   Int
+  witel     witel  @relation(fields: [witelId], references: [id])
+
+  site site[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model witel {
+  id        Int    @id @default(autoincrement())
+  namaWitel String
+
+  datel datel[]
+  site  site[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model site {
+  id        Int      @id @default(autoincrement())
+  pakid     String
+  sid       String
+  status    String
+  treg      String
+  witelId   Int
+  datelId   Int
+  siteName  String
+  address   String
+  longitude String
+  latitude  String
+  city      String
+  region    String
+  ownLease  String
+  userId    String?
+  user      User?   @relation(fields: [userId], references: [id])
+  witel     witel    @relation(fields: [witelId], references: [id])
+  datel     datel    @relation(fields: [datelId], references: [id])
+  permit    permit[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum detailStatus {
+  Checking
+  Request
+  Approved
+  Rejected
+  PermitInProcess
+  PermitCompleted
+}
+
+model permit {
+  id              String       @id @default(cuid())
+  pekerjaan       String
+  detailPekerjaan String
+  customer        String?
+  catuan          String?
+  noPermit        String?
+  tglPermit       DateTime
+  tglExpired      DateTime
+  perusahaan      String
+  status          detailStatus @default(Checking)
+  siteId          Int
+  userId          String
+  site            site         @relation(fields: [siteId], references: [id])
+  user            User        @relation(fields: [userId], references: [id])
+  visitorPIC      visitorPIC[]
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+}
+
+model visitorPIC {
+  id       Int     @id @default(autoincrement())
+  namaPic  String
+  noHP     Int
+  email    String? @unique
+  nik      Int
+  area     String
+  permitId String
+  permit   permit  @relation(fields: [permitId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
