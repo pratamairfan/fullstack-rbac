@@ -43,7 +43,7 @@ model Session {
   sessionToken String   @unique @map("session_token")
   userId       String   @map("user_id")
   expires      DateTime
-  user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("sessions")
 }
@@ -58,21 +58,20 @@ model VerificationToken {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  firstName String?
-  lastName  String?
-  imgUrl    String?
-  phone     String?
-  password  String?
-  role      UserRole @default(User)
-  permit    permit[]
-  site      site[]
+  id            String    @id @default(cuid())
+  firstName     String?
+  lastName      String?
+  email         String?   @unique
+  emailVerified DateTime? @map("email_verified")
+  image         String?
+  password      String?
+  role          UserRole  @default(User)
+  accounts      Account[]
+  sessions      Session[]
+  site          site[]
+  permit        permit[]
 
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  account   Account[]
-  session   Session[]
+  // @@map("users")
 }
 
 model datel {
@@ -114,7 +113,7 @@ model site {
   region    String
   ownLease  String
   userId    String?
-  user      User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
   witel     witel    @relation(fields: [witelId], references: [id], onDelete: Cascade)
   datel     datel    @relation(fields: [datelId], references: [id], onDelete: Cascade)
   permit    permit[]
@@ -145,7 +144,7 @@ model permit {
   siteId          Int
   userId          String
   site            site         @relation(fields: [siteId], references: [id], onDelete: Cascade)
-  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user            User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   visitorPIC      visitorPIC[]
   createdAt       DateTime     @default(now())
   updatedAt       DateTime     @updatedAt

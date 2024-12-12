@@ -40,20 +40,16 @@ CREATE TABLE "verification_tokens" (
 );
 
 -- CreateTable
-CREATE TABLE "Users" (
+CREATE TABLE "users" (
     "id" TEXT NOT NULL,
-    "clerkId" TEXT NOT NULL,
-    "email" TEXT NOT NULL,
-    "firstName" TEXT,
-    "lastName" TEXT,
-    "imgUrl" TEXT,
-    "phone" TEXT,
-    "role" "UserRole" NOT NULL DEFAULT 'User',
+    "name" TEXT,
+    "email" TEXT,
+    "email_verified" TIMESTAMP(3),
+    "image" TEXT,
     "password" TEXT,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "role" "UserRole" NOT NULL DEFAULT 'User',
 
-    CONSTRAINT "Users_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -145,37 +141,34 @@ CREATE UNIQUE INDEX "sessions_session_token_key" ON "sessions"("session_token");
 CREATE UNIQUE INDEX "verification_tokens_identifier_token_key" ON "verification_tokens"("identifier", "token");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Users_clerkId_key" ON "Users"("clerkId");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Users_email_key" ON "Users"("email");
+CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "visitorPIC_email_key" ON "visitorPIC"("email");
 
 -- AddForeignKey
-ALTER TABLE "accounts" ADD CONSTRAINT "accounts_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "Users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "accounts" ADD CONSTRAINT "accounts_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "sessions" ADD CONSTRAINT "sessions_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "Users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "sessions" ADD CONSTRAINT "sessions_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "datel" ADD CONSTRAINT "datel_witelId_fkey" FOREIGN KEY ("witelId") REFERENCES "witel"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "datel" ADD CONSTRAINT "datel_witelId_fkey" FOREIGN KEY ("witelId") REFERENCES "witel"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "site" ADD CONSTRAINT "site_userId_fkey" FOREIGN KEY ("userId") REFERENCES "Users"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "site" ADD CONSTRAINT "site_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "site" ADD CONSTRAINT "site_witelId_fkey" FOREIGN KEY ("witelId") REFERENCES "witel"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "site" ADD CONSTRAINT "site_witelId_fkey" FOREIGN KEY ("witelId") REFERENCES "witel"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "site" ADD CONSTRAINT "site_datelId_fkey" FOREIGN KEY ("datelId") REFERENCES "datel"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "site" ADD CONSTRAINT "site_datelId_fkey" FOREIGN KEY ("datelId") REFERENCES "datel"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "permit" ADD CONSTRAINT "permit_siteId_fkey" FOREIGN KEY ("siteId") REFERENCES "site"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "permit" ADD CONSTRAINT "permit_siteId_fkey" FOREIGN KEY ("siteId") REFERENCES "site"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "permit" ADD CONSTRAINT "permit_userId_fkey" FOREIGN KEY ("userId") REFERENCES "Users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "permit" ADD CONSTRAINT "permit_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "visitorPIC" ADD CONSTRAINT "visitorPIC_permitId_fkey" FOREIGN KEY ("permitId") REFERENCES "permit"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "visitorPIC" ADD CONSTRAINT "visitorPIC_permitId_fkey" FOREIGN KEY ("permitId") REFERENCES "permit"("id") ON DELETE CASCADE ON UPDATE CASCADE;

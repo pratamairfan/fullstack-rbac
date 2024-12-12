@@ -28,7 +28,6 @@ export const signUpCredentials = async (
         email,
         password: hashedPassword,
       },
-      
     });
   } catch (error) {
     return { message: "Failed to Sign Up User" };
