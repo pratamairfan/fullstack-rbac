@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { signUpCredentials } from "@/lib/action";
 import { useFormState } from "react-dom";
+import { Button } from "../ui/button";
 
 const FormSignin = () => {
   const [state, formAction] = useFormState(signUpCredentials, null);
@@ -56,13 +57,14 @@ const FormSignin = () => {
           </span>
         </div>
       </div>
-      
-      <button
+
+      {/* <button
         type="submit"
         className="w-full text-white bg-teal-600 hover:bg-teal-700 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
       >
         Sign In
-      </button>
+      </button> */}
+      <Button text="Sign In" />
       <p className="text-sm font-light text-gray-500">
         Does not have an account yet?
         <Link href="/sign-up" className="text-teal-700 hover:underline">

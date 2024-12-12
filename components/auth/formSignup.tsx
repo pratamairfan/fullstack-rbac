@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { signUpCredentials } from "@/lib/action";
 import { useFormState } from "react-dom";
+import {Button} from "@/components/ui/button";
 
 const FormSignup = () => {
   const [state, formAction] = useFormState(signUpCredentials, null);
@@ -113,15 +114,10 @@ const FormSignup = () => {
           </span>
         </div>
       </div>
-      <button
-        type="submit"
-        className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-      >
-        Sign Up
-      </button>
+      <Button text="Sign Up" />
       <p className="text-sm font-light text-gray-500">
         Already have an account?
-        <Link href="/sign-in" className="text-blue-700 hover:underline">
+        <Link href="/sign-in" className="text-teal-700 hover:underline">
           {" "}
           Sign in
         </Link>
