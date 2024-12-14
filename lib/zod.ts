@@ -18,3 +18,11 @@ export const SignUpSchema = object({
   message: "Passwords do not match",
   path: ["confirmPassword"],
 });
+
+export const SignInSchema = object({
+  email: string().email("Invalid Email, ").min(1, "email is required"),
+  password: string({
+    required_error: "Password is required",
+  })
+    .min(8, "Password must be at least 8 characters")
+});

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { signUpCredentials } from "@/lib/action";
 import { useFormState } from "react-dom";
-import {Button} from "@/components/ui/button";
+import { Buttons } from "@/components/ui/buttons";
 
 const FormSignup = () => {
   const [state, formAction] = useFormState(signUpCredentials, null);
@@ -21,7 +21,7 @@ const FormSignup = () => {
         <div className="w-full">
           <label
             htmlFor="firstName"
-            className="block mb-2 text-sm font-medium text-gray-900"
+            className="block mb-2 text-sm font-medium text-foreground"
           >
             First Name
           </label>
@@ -29,7 +29,7 @@ const FormSignup = () => {
             type="text"
             name="firstName"
             placeholder="John"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            className="bg-gray-50 border border-gray-300 text-background text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           />
           <div aria-live="polite" aria-atomic="true">
             <span className="text-xs text-red-500 mt-2 ">
@@ -40,7 +40,7 @@ const FormSignup = () => {
         <div className="w-full">
           <label
             htmlFor="lastName"
-            className="block mb-2 text-sm font-medium text-gray-900"
+            className="block mb-2 text-sm font-medium text-foreground"
           >
             Last Name
           </label>
@@ -48,7 +48,7 @@ const FormSignup = () => {
             type="text"
             name="lastName"
             placeholder="Doe"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            className="bg-gray-50 border border-gray-300 text-background text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           />
           <div aria-live="polite" aria-atomic="true">
             <span className="text-xs text-red-500 mt-2 ">
@@ -60,7 +60,7 @@ const FormSignup = () => {
       <div>
         <label
           htmlFor="email"
-          className="block mb-2 text-sm font-medium text-gray-900"
+          className="block mb-2 text-sm font-medium text-foreground"
         >
           Email
         </label>
@@ -68,7 +68,7 @@ const FormSignup = () => {
           type="email"
           name="email"
           placeholder="johndoe@example.com"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          className="bg-gray-50 border border-gray-300 text-background text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         />
         <div aria-live="polite" aria-atomic="true">
           <span className="text-xs text-red-500 mt-2 ">
@@ -79,7 +79,7 @@ const FormSignup = () => {
       <div>
         <label
           htmlFor="password"
-          className="block mb-2 text-sm font-medium text-gray-900"
+          className="block mb-2 text-sm font-medium text-foreground"
         >
           Password
         </label>
@@ -87,7 +87,7 @@ const FormSignup = () => {
           type="password"
           name="password"
           placeholder="••••••••"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          className="bg-gray-50 border border-gray-300 text-background text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         />
         <div aria-live="polite" aria-atomic="true">
           <span className="text-xs text-red-500 mt-2 ">
@@ -98,7 +98,7 @@ const FormSignup = () => {
       <div>
         <label
           htmlFor="confirmPassword"
-          className="block mb-2 text-sm font-medium text-gray-900"
+          className="block mb-2 text-sm font-medium text-foreground"
         >
           Confirm Password
         </label>
@@ -106,7 +106,7 @@ const FormSignup = () => {
           type="password"
           name="confirmPassword"
           placeholder="••••••••"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          className="bg-gray-50 border border-gray-300 text-background text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         />
         <div aria-live="polite" aria-atomic="true">
           <span className="text-xs text-red-500 mt-2 ">
@@ -114,7 +114,7 @@ const FormSignup = () => {
           </span>
         </div>
       </div>
-      <Button text="Sign Up" />
+      <Buttons text="Sign Up" />
       <p className="text-sm font-light text-gray-500">
         Already have an account?
         <Link href="/sign-in" className="text-teal-700 hover:underline">

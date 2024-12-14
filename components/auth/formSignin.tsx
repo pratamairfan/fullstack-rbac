@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { signUpCredentials } from "@/lib/action";
+import { signInCredentials } from "@/lib/action";
 import { useFormState } from "react-dom";
-import { Button } from "../ui/button";
+import { Buttons } from "../ui/buttons";
 
 const FormSignin = () => {
-  const [state, formAction] = useFormState(signUpCredentials, null);
+  const [state, formAction] = useFormState(signInCredentials, null);
   return (
     <form action={formAction} className="space-y-6">
       {state?.message ? (
@@ -20,16 +20,15 @@ const FormSignin = () => {
       <div>
         <label
           htmlFor="email"
-          className="block mb-2 text-sm font-medium text-gray-900"
+          className="block mb-2 text-sm font-medium text-foreground"
         >
           Email
         </label>
         <input
           type="email"
           name="email"
-          id="email"
           placeholder="johndoe@example.com"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          className="bg-gray-50 border border-gray-300 text-background text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         />
         <div aria-live="polite" aria-atomic="true">
           <span className="text-xs text-red-500 mt-2 ">
@@ -40,16 +39,15 @@ const FormSignin = () => {
       <div>
         <label
           htmlFor="password"
-          className="block mb-2 text-sm font-medium text-gray-900"
+          className="block mb-2 text-sm font-medium text-foreground"
         >
           Password
         </label>
         <input
           type="password"
           name="password"
-          id="password"
           placeholder="••••••••"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          className="bg-gray-50 border border-gray-300 text-background text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         />
         <div aria-live="polite" aria-atomic="true">
           <span className="text-xs text-red-500 mt-2 ">
@@ -58,15 +56,9 @@ const FormSignin = () => {
         </div>
       </div>
 
-      {/* <button
-        type="submit"
-        className="w-full text-white bg-teal-600 hover:bg-teal-700 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-      >
-        Sign In
-      </button> */}
-      <Button text="Sign In" />
+      <Buttons text="Sign In" />
       <p className="text-sm font-light text-gray-500">
-        Does not have an account yet?
+        Don&apos;t have an account yet?
         <Link href="/sign-up" className="text-teal-700 hover:underline">
           {" "}
           Sign up
