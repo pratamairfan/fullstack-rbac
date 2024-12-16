@@ -48,4 +48,21 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
+  // callback
+  callbacks: {
+    authorized({ auth, request: { nextUrl } }) {
+      const isLoggedIn = !!auth?.user;
+      const protectedRoute = ["/dashboard", "/user"];
+
+      if (!isLoggedIn && protectedRoute.includes(nextUrl.pathname)) {
+        return Response.redirect(new URL("/sign-in", nextUrl));
+      }
+
+      if (isLoggedIn && nextUrl.pathname.startsWith("/sign-in")) {
+        return Response.redirect(new URL("/dashboard", nextUrl));
+      }
+      
+      return true;
+    },
+  },
 });
